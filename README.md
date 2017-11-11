@@ -1,13 +1,39 @@
-## Heroku
+# nko2017-Smack
 
-Use `devDependencies` during buiild - by setting env:
+
+## Setup environments
+
+### Local Debug
+
+I only succeeded in attaching to debugger during local dev:
 
 ```bash
+# Your webserver
+npm run build-org
+npm run serve-debug
+```
+
+In VS Code:
+
+* Put breakpoint in a controller
+* Attach to debugger (running on port 9229) by pressing F5
+
+Browse to:
+
+* <http://localhost:3000>
+
+### Heroku
+
+The project can run in Heroku.
+After you have created an App in Heroku and connected to your github repo do:
+
+```bash
+# Use `devDependencies` during build - by setting env
 heroku config:set NPM_CONFIG_PRODUCTION=false
 # or do it via settings page in Heroku https://dashboard.heroku.com/apps/yourapp/settings
 ```
 
-Do also add settings from `.env.example` to https://dashboard.heroku.com/apps/yourapp/settings
+Do also add settings from `.env.example` via <https://dashboard.heroku.com/apps/yourapp/settings>
 
 * <https://devcenter.heroku.com/articles/nodejs-support#heroku-specific-build-steps>
 * [Heroku starter](https://github.com/heroku-examples/node-knockout-react-node-starter)

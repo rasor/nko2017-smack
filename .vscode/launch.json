@@ -2,8 +2,11 @@
     // Use IntelliSense to learn about possible Node.js debug attributes.
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    // And https://github.com/Microsoft/TypeScript-Node-Starter
+    // https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_supported-nodelike-runtimes
     "version": "0.2.0",
     "configurations": [        
+
         {
             "type": "node",
             "request": "attach",
@@ -19,7 +22,7 @@
             "outFiles": [
                 "../dist/**/*.js"
             ],
-            "preLaunchTask": "npm: build",
+            "preLaunchTask": "npm: build-org",
             "protocol": "inspector"
         }
     ]
