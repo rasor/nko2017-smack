@@ -87,8 +87,8 @@ app.use(expressValidator());
 //     autoReconnect: true
 //   })
 // }));
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 // app.use(flash());
 // app.use(lusca.xframe("SAMEORIGIN"));
 // app.use(lusca.xssProtection(true));
@@ -116,8 +116,8 @@ app.use(express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }))
  * Primary app routes.
  */
 app.get("/", homeController.index);
-// app.get("/login", userController.getLogin);
-// app.post("/login", userController.postLogin);
+app.get("/login", userController.getLogin);
+app.post("/login", userController.postLogin);
 // app.get("/logout", userController.logout);
 // app.get("/forgot", userController.getForgot);
 // app.post("/forgot", userController.postForgot);
