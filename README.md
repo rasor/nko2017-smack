@@ -48,7 +48,13 @@ The MONGODB_URI should come from your mLab DB.
 
 ## Credits
 
-* [TypeScript Node Starter](https://github.com/Microsoft/TypeScript-Node-Starter)
+Thanks to
+
+* The people behind the [TypeScript Node Starter](https://github.com/Microsoft/TypeScript-Node-Starter) - for creating the template
+* All the providers of the npm packages in the template
+* [Heroku](https://dashboard.heroku.com) - for hosting the web
+* [mLab](https://mlab.com) - for hosting the app data
+* [FaceBook](https://www.facebook.com/) - for hosting the Identities
 
 ----------------
 
