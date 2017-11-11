@@ -14,12 +14,12 @@ import * as passport from "passport";
 import expressValidator = require("express-validator");
 import * as session from "express-session";
 
-// import * as flash from "express-flash";
+import * as flash from "express-flash";
 
-// import * as mongo from "connect-mongo";
-// import * as mongoose from "mongoose";
+import * as mongo from "connect-mongo";
+import * as mongoose from "mongoose";
 
-// const MongoStore = mongo(session);
+const MongoStore = mongo(session);
 
 /**
  * Load environment variables from .env file, when running from local, where API keys and passwords are configured.
@@ -57,15 +57,11 @@ app.get("/example-path", async (req, res, next) => {
 /**
  * Connect to MongoDB.
  */
-// mongoose.Promise = global.Promise;
-// mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
-
-// mongoose.connection.on("error", () => {
-//   console.log("MongoDB connection error. Please make sure MongoDB is running.");
-//   process.exit();
-// });
-
-
+mongoose.connect(process.env.MONGODB_URI || process.env.MONGOLAB_URI);
+mongoose.connection.on("error", () => {
+  console.log("MongoDB connection error. Please make sure MongoDB is running.");
+  process.exit();
+});
 
 /**
  * Express configuration.
@@ -78,38 +74,38 @@ app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator());
-// app.use(session({
-//   resave: true,
-//   saveUninitialized: true,
-//   secret: process.env.SESSION_SECRET,
-//   store: new MongoStore({
-//     url: process.env.MONGODB_URI || process.env.MONGOLAB_URI,
-//     autoReconnect: true
-//   })
-// }));
+app.use(session({
+  resave: true,
+  saveUninitialized: true,
+  secret: process.env.SESSION_SECRET,
+  store: new MongoStore({
+    url: process.env.MONGODB_URI || process.env.MONGOLAB_URI,
+    autoReconnect: true
+  })
+}));
 app.use(passport.initialize());
 app.use(passport.session());
-// app.use(flash());
-// app.use(lusca.xframe("SAMEORIGIN"));
-// app.use(lusca.xssProtection(true));
-// app.use((req, res, next) => {
-//   res.locals.user = req.user;
-//   next();
-// });
-// app.use((req, res, next) => {
-//   // After successful login, redirect back to the intended page
-//   if (!req.user &&
-//       req.path !== "/login" &&
-//       req.path !== "/signup" &&
-//       !req.path.match(/^\/auth/) &&
-//       !req.path.match(/\./)) {
-//     req.session.returnTo = req.path;
-//   } else if (req.user &&
-//       req.path == "/account") {
-//     req.session.returnTo = req.path;
-//   }
-//   next();
-// });
+app.use(flash());
+app.use(lusca.xframe("SAMEORIGIN"));
+app.use(lusca.xssProtection(true));
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
+app.use((req, res, next) => {
+  // After successful login, redirect back to the intended page
+  if (!req.user &&
+      req.path !== "/login" &&
+      req.path !== "/signup" &&
+      !req.path.match(/^\/auth/) &&
+      !req.path.match(/\./)) {
+    req.session.returnTo = req.path;
+  } else if (req.user &&
+      req.path == "/account") {
+    req.session.returnTo = req.path;
+  }
+  next();
+});
 app.use(express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }));
 
 /**
@@ -118,7 +114,7 @@ app.use(express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }))
 app.get("/", homeController.index);
 app.get("/login", userController.getLogin);
 app.post("/login", userController.postLogin);
-// app.get("/logout", userController.logout);
+app.get("/logout", userController.logout);
 // app.get("/forgot", userController.getForgot);
 // app.post("/forgot", userController.postForgot);
 // app.get("/reset/:token", userController.getReset);
@@ -133,19 +129,19 @@ app.post("/login", userController.postLogin);
 // app.post("/account/delete", passportConfig.isAuthenticated, userController.postDeleteAccount);
 // app.get("/account/unlink/:provider", passportConfig.isAuthenticated, userController.getOauthUnlink);
 
-// /**
-//  * API examples routes.
-//  */
-// app.get("/api", apiController.getApi);
-// app.get("/api/facebook", passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getFacebook);
+/**
+ * API examples routes.
+ */
+app.get("/api", apiController.getApi);
+app.get("/api/facebook", passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getFacebook);
 
-// /**
-//  * OAuth authentication routes. (Sign in)
-//  */
-// app.get("/auth/facebook", passport.authenticate("facebook", { scope: ["email", "public_profile"] }));
-// app.get("/auth/facebook/callback", passport.authenticate("facebook", { failureRedirect: "/login" }), (req, res) => {
-//   res.redirect(req.session.returnTo || "/");
-// });
+/**
+ * OAuth authentication routes. (Sign in)
+ */
+app.get("/auth/facebook", passport.authenticate("facebook", { scope: ["email", "public_profile"] }));
+app.get("/auth/facebook/callback", passport.authenticate("facebook", { failureRedirect: "/login" }), (req, res) => {
+  res.redirect(req.session.returnTo || "/");
+});
 
 
 /**

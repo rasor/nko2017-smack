@@ -10,7 +10,7 @@ I only succeeded in attaching to debugger during local dev:
 ```bash
 # Your webserver
 npm run build-org
-npm run serve-debug
+npm run watch-debug
 ```
 
 In VS Code:
