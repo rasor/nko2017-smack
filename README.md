@@ -3,6 +3,11 @@
 
 ## Setup environments
 
+The project uses MongoDB, so you'll need to setup a [local MongoDb](https://www.mongodb.com/download-center#production) or use a remote one.  
+[Studio 3T](https://studio3t.com/) - (previously MongoChef) is a great viewer for the DB.
+
+Start MongoDB ´mongod.exe´ before your webserver.
+
 ### Local Debug
 
 I only succeeded in attaching to debugger during local dev:
@@ -24,6 +29,8 @@ Browse to:
 
 ### Heroku
 
+The project uses MongoDB, so you'll need to setup a server hosted base. I use the free sandbox version at [mLab](https://mlab.com).
+
 The project can run in Heroku.
 After you have created an App in Heroku and connected to your github repo do:
 
@@ -33,7 +40,8 @@ heroku config:set NPM_CONFIG_PRODUCTION=false
 # or do it via settings page in Heroku https://dashboard.heroku.com/apps/yourapp/settings
 ```
 
-Do also add settings from `.env.example` via <https://dashboard.heroku.com/apps/yourapp/settings>
+Do also add settings from `.env.example` via <https://dashboard.heroku.com/apps/yourapp/settings>.  
+The MONGODB_URI should come from your mLab DB.
 
 * <https://devcenter.heroku.com/articles/nodejs-support#heroku-specific-build-steps>
 * [Heroku starter](https://github.com/heroku-examples/node-knockout-react-node-starter)
