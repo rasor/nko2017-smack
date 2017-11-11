@@ -7,7 +7,8 @@ heroku config:set NPM_CONFIG_PRODUCTION=false
 # or do it via settings page in Heroku
 ```
 
-* https://devcenter.heroku.com/articles/nodejs-support#heroku-specific-build-steps
+* <https://devcenter.heroku.com/articles/nodejs-support#heroku-specific-build-steps>
+* [Heroku starter](https://github.com/heroku-examples/node-knockout-react-node-starter)
 
 ## Credits
 
