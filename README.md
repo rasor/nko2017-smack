@@ -1,4 +1,13 @@
+## Heroku
 
+Use `devDependencies` during buiild - by setting env:
+
+```bash
+heroku config:set NPM_CONFIG_PRODUCTION=false
+# or do it via settings page in Heroku
+```
+
+* https://devcenter.heroku.com/articles/nodejs-support#heroku-specific-build-steps
 
 ## Credits
 
