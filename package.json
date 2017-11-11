@@ -13,6 +13,8 @@
     "npm": "5.5.1"
   },
   "scripts": {
+    "node-sass": "node-sass",
+    "tsc": "tsc",
     "heroku-postbuild": "npm run build",
     "start": "node dist/server.js",
     "start-dev": "npm run build && npm run watch",
