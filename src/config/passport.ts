@@ -64,7 +64,8 @@ passport.use(new LocalStrategy({ usernameField: "email" }, (email, password, don
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_ID,
   clientSecret: process.env.FACEBOOK_SECRET,
-  callbackURL: "/auth/facebook/callback",
+  // https://developers.facebook.com/apps/<FACEBOOK_ID>/fb-login/ :
+  callbackURL: "/auth/facebook/callback", // Valid OAuth redirect URIs
   profileFields: ["name", "email", "link", "locale", "timezone"],
   passReqToCallback: true
 }, (req: any, accessToken, refreshToken, profile, done) => {

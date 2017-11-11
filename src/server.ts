@@ -142,7 +142,9 @@ app.get("/auth/facebook", passport.authenticate("facebook", { scope: ["email", "
 app.get("/auth/facebook/callback", passport.authenticate("facebook", { failureRedirect: "/login" }), (req, res) => {
   res.redirect(req.session.returnTo || "/");
 });
-
+// When serving in Heroku, then callback url is sent without SSL. When FB calls back it is thus without SSL. Trust proxy fixes that.
+// https://stackoverflow.com/questions/20739744/passportjs-callback-switch-between-http-and-https
+app.enable("trust proxy");
 
 /**
  * Error Handler. Provides full stack - remove for production
