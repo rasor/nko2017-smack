@@ -69,13 +69,13 @@ app.get("/example-path", async (req, res, next) => {
  * Express configuration.
  */
 app.set("port", process.env.PORT || 3000);
-// app.set("views", path.join(__dirname, "../views"));
-// app.set("view engine", "pug");
-// app.use(compression());
-// app.use(logger("dev"));
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(expressValidator());
+app.set("views", path.join(__dirname, "../views"));
+app.set("view engine", "pug");
+app.use(compression());
+app.use(logger("dev"));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator());
 // app.use(session({
 //   resave: true,
 //   saveUninitialized: true,
@@ -108,12 +108,12 @@ app.set("port", process.env.PORT || 3000);
 //   }
 //   next();
 // });
-// app.use(express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }));
+app.use(express.static(path.join(__dirname, "public"), { maxAge: 31557600000 }));
 
-// /**
-//  * Primary app routes.
-//  */
-// app.get("/", homeController.index);
+/**
+ * Primary app routes.
+ */
+app.get("/", homeController.index);
 // app.get("/login", userController.getLogin);
 // app.post("/login", userController.postLogin);
 // app.get("/logout", userController.logout);
