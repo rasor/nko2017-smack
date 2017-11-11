@@ -20,9 +20,12 @@ import expressValidator = require("express-validator");
 const MongoStore = mongo(session);
 
 /**
- * Load environment variables from .env file, where API keys and passwords are configured.
+ * Load environment variables from .env file, when running from local, where API keys and passwords are configured.
+ * Else load them from https://dashboard.heroku.com/apps/yourapp/settings
  */
-dotenv.config({ path: ".env.example" });
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config({ path: ".env.example" });
+}
 
 
 /**

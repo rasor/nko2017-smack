@@ -4,8 +4,10 @@ Use `devDependencies` during buiild - by setting env:
 
 ```bash
 heroku config:set NPM_CONFIG_PRODUCTION=false
-# or do it via settings page in Heroku
+# or do it via settings page in Heroku https://dashboard.heroku.com/apps/yourapp/settings
 ```
+
+Do also add settings from `.env.example` to https://dashboard.heroku.com/apps/yourapp/settings
 
 * <https://devcenter.heroku.com/articles/nodejs-support#heroku-specific-build-steps>
 * [Heroku starter](https://github.com/heroku-examples/node-knockout-react-node-starter)
