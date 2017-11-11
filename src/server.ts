@@ -3,21 +3,23 @@
  */
 import * as express from "express";
 import * as compression from "compression";  // compresses requests
-import * as session from "express-session";
 import * as bodyParser from "body-parser";
 import * as logger from "morgan";
 import * as errorHandler from "errorhandler";
 import * as lusca from "lusca";
 import * as dotenv from "dotenv";
-import * as mongo from "connect-mongo";
-import * as flash from "express-flash";
 import * as path from "path";
-import * as mongoose from "mongoose";
 import * as passport from "passport";
+
 import expressValidator = require("express-validator");
+import * as session from "express-session";
 
+// import * as flash from "express-flash";
 
-const MongoStore = mongo(session);
+// import * as mongo from "connect-mongo";
+// import * as mongoose from "mongoose";
+
+// const MongoStore = mongo(session);
 
 /**
  * Load environment variables from .env file, when running from local, where API keys and passwords are configured.
@@ -87,7 +89,7 @@ app.use(expressValidator());
 // }));
 // app.use(passport.initialize());
 // app.use(passport.session());
-app.use(flash());
+// app.use(flash());
 // app.use(lusca.xframe("SAMEORIGIN"));
 // app.use(lusca.xssProtection(true));
 // app.use((req, res, next) => {
