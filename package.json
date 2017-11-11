@@ -13,17 +13,15 @@
     "npm": "5.5.1"
   },
   "scripts": {
-    "node-sass": "node-sass",
-    "tsc": "./node_modules/.bin/tsc",
     "heroku-postbuild": "npm run build",
     "start": "node dist/server.js",
     "start-dev": "npm run build && npm run watch",
-    "build": "pwd && ls ./node_modules/.bin",
+    "build": "pwd && ls ./node_modules/.bin && npm run build-ts && npm run tslint && npm run copy-static-assets",
     "build-org": "npm run build-sass && npm run build-ts && npm run tslint && npm run copy-static-assets",
     "serve": "nodemon dist/server.js",
     "watch": "concurrently -k -p \"[{name}]\" -n \"Sass,TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-sass\" \"npm run watch-ts\" \"npm run serve\"",
     "test": "jest --forceExit",
-    "build-ts": "./node_modules/.bin/tsc",
+    "build-ts": "tsc",
     "watch-ts": "tsc -w",
     "build-sass": "node-sass src/public/css/main.scss dist/public/css/main.css",
     "watch-sass": "node-sass -w src/public/css/main.scss dist/public/css/main.css",
@@ -71,7 +69,8 @@
     "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",
     "pug": "^2.0.0-beta6",
-    "request": "^2.78.0"
+    "request": "^2.78.0",
+    "typescript": "^2.4.0"
   },
   "devDependencies": {
     "@types/async": "^2.0.40",
