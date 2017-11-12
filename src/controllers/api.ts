@@ -24,12 +24,36 @@ export let getApi = (req: Request, res: Response) => {
 export let getFacebook = (req: Request, res: Response, next: NextFunction) => {
   const token = req.user.tokens.find((token: any) => token.kind === "facebook");
   graph.setAccessToken(token.accessToken);
-  graph.get(`${req.user.facebook}?fields=id,name,email,first_name,last_name,gender,link,locale,timezone`, (err: Error, results: graphObjs.IFacebookAPIUserResponse) => {
+  const reqMe = `${req.user.facebook}?fields=id,name,email,first_name,last_name,gender,link,locale,timezone,location,friends`;
+  graph.get(reqMe, (err: Error, respMe: graphObjs.IFacebookAPIUserResponse) => {
     if (err) { return next(err); }
-    res.render("api/facebook", {
-      title: "Facebook API",
-      profile: results
-    });
+
+    const respFriends: graphObjs.IFacebookAPIUserResponse[] = [];
+    // any friends use this app?
+    let friendsCounter = 0;
+    if (respMe.friends && respMe.friends.data.length > 0) {
+      respMe.friends.data.forEach(f => {
+        friendsCounter ++;
+        const reqFr = `${f.id}?fields=id,name,location`;
+        graph.get(reqFr, (err: Error, respFr: graphObjs.IFacebookAPIUserResponse) => {
+          if (err) { return next(err); }
+
+          respFriends.push(respFr);
+
+          // if done fetching users then render
+          if (friendsCounter === respMe.friends.data.length) {
+            res.render("api/facebook", {
+              title: "Facebook API",
+              reqMe: reqMe,
+              profile: respMe,
+              reqFr: reqFr,
+              respFriends: respFriends,
+              noOfFriends: respMe.friends.data.length
+            });
+          }
+        });
+      });
+    }
   });
 };
 

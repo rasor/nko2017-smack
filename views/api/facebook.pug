@@ -24,9 +24,23 @@ block content
     h4= profile.name
   //- h6 First Name: #{profile.first_name}
   //- h6 Last Name: #{profile.last_name}
-  h6 Gender: #{profile.gender}
+  //- h6 Gender: #{profile.gender}
   //- h6 Username: #{profile.username}
   //- h6 Link: #{profile.link}
   //- h6 Email: #{profile.email}
   //- h6 Locale: #{profile.locale}
   //- h6 Timezone: #{profile.timezone}
+  case noOfFriends
+    when 0
+      - break
+    default
+      .panel.panel-default
+        .panel-heading My FB friends on Smack
+        ul.list-group
+          li.list-group-item 
+            .media
+              .media-left
+                img.media-object(src=`https://graph.facebook.com/${respFriends[0].id}/picture?type=small`)
+              .media-body
+                h4.media-heading #{respFriends[0].name}
+
