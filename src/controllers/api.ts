@@ -37,8 +37,14 @@ export let getFacebook = (req: Request, res: Response, next: NextFunction) => {
  * testing data from FB.
  */
 export let getFbResp = (req: Request, res: Response, next: NextFunction) => {
-  res.render("api/facebook/fbresp", {
-    title: "Facebook Data"
+  const token = req.user.tokens.find((token: any) => token.kind === "facebook");
+  graph.setAccessToken(token.accessToken);
+  graph.get(`${req.user.facebook}?fields=id,name,email,first_name,last_name,gender,link,locale,timezone`, (err: Error, results: graph.FacebookUser) => {
+    if (err) { return next(err); }
+    res.render("api/facebook/fbresp", {
+      title: "Facebook API",
+      profile: results
+    });
   });
 };
 
