@@ -11,10 +11,8 @@
         | Smack
     .collapse.navbar-collapse
       ul.nav.navbar-nav
-        li(class=(title == 'Home') ? 'active' : undefined)
-          a(href='/') Home
         li(class=(title == 'API Examples') ? 'active' : undefined)
-          a(href='/api') API Examples
+          a(href='/api') Facebook Examples
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title == 'Login') ? 'active' : undefined)
