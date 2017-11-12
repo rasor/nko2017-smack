@@ -37,10 +37,11 @@ block content
       .panel.panel-default
         .panel-heading My FB friends on Smack
         ul.list-group
-          li.list-group-item 
-            .media
-              .media-left
-                img.media-object(src=`https://graph.facebook.com/${respFriends[0].id}/picture?type=small`)
-              .media-body
-                h4.media-heading #{respFriends[0].name}
+          - for (var x = 0; x < noOfFriends; x++)
+            li.list-group-item
+              .media
+                .media-left
+                  img.media-object(src=`https://graph.facebook.com/${respFriends[x].id}/picture?type=small`)
+                .media-body
+                  h4.media-heading #{respFriends[x].name}
 
