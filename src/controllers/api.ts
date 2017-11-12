@@ -46,23 +46,29 @@ export let getFbResp = (req: Request, res: Response, next: NextFunction) => {
 
     const respFriends: graphObjs.IFacebookAPIUserResponse[] = [];
     // any friends use this app?
-    // if (respMe.friends && respMe.friends.data.length > 0) {
-    //   respMe.friends.data.forEach(f => {
-    //     const reqFr = `${f.id}?location`;
-    //     graph.get(reqFr, (err: Error, respFr: graphObjs.IFacebookAPIUserResponse) => {
-    //       if (err) { return next(err); }
+    let friendsCounter = 0;
+    if (respMe.friends && respMe.friends.data.length > 0) {
+      respMe.friends.data.forEach(f => {
+        friendsCounter ++;
+        const reqFr = `${f.id}?fields=id,name,location`;
+        graph.get(reqFr, (err: Error, respFr: graphObjs.IFacebookAPIUserResponse) => {
+          if (err) { return next(err); }
 
-    //       respFriends.push(respFr);
-    //     });
-    //   });
-    // }
+          respFriends.push(respFr);
 
-    res.render("api/facebook/fbresp", {
-      title: "Facebook Data",
-      reqMe: reqMe,
-      respMe: respMe,
-      respFriends: respFriends
-    });
+          // if done fetching users then render
+          if (friendsCounter === respMe.friends.data.length) {
+            res.render("api/facebook/fbresp", {
+              title: "Facebook Data",
+              reqMe: reqMe,
+              respMe: respMe,
+              reqFr: reqFr,
+              respFriends: respFriends
+            });
+          }
+        });
+      });
+    }
   });
 };
 
