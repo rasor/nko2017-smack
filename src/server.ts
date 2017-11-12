@@ -131,8 +131,9 @@ app.get("/api/facebook/fbresp", passportConfig.isAuthenticated, passportConfig.i
 
 /**
  * OAuth authentication routes. (Sign in)
+ * scopes: https://developers.facebook.com/docs/facebook-login/permissions/
  */
-app.get("/auth/facebook", passport.authenticate("facebook", { scope: ["email", "public_profile"] }));
+app.get("/auth/facebook", passport.authenticate("facebook", { scope: ["email", "public_profile", "user_friends", "user_location"] }));
 app.get("/auth/facebook/callback", passport.authenticate("facebook", { failureRedirect: "/login" }), (req, res) => {
   res.redirect(req.session.returnTo || "/");
 });
