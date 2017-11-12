@@ -39,11 +39,14 @@ export let getFacebook = (req: Request, res: Response, next: NextFunction) => {
 export let getFbResp = (req: Request, res: Response, next: NextFunction) => {
   const token = req.user.tokens.find((token: any) => token.kind === "facebook");
   graph.setAccessToken(token.accessToken);
-  graph.get(`${req.user.facebook}?fields=id,name,email,first_name,last_name,gender,link,locale,timezone`, (err: Error, results: graph.FacebookUser) => {
+  const reqMe = `${req.user.facebook}?fields=id,name,location,friends,gender`;
+  graph.get(reqMe, (err: Error, respMe: graph.FacebookUser) => {
     if (err) { return next(err); }
+
     res.render("api/facebook/fbresp", {
-      title: "Facebook API",
-      profile: results
+      title: "Facebook Data",
+      reqMe: reqMe,
+      respMe: respMe
     });
   });
 };
