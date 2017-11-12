@@ -11,8 +11,10 @@
         | Smack
     .collapse.navbar-collapse
       ul.nav.navbar-nav
-        li(class=(title == 'API Examples') ? 'active' : undefined)
-          a(href='/api') Facebook Examples
+        //- li(class=(title == 'Facebook Examples') ? 'active' : undefined)
+        //-   a(href='/api') Facebook Examples
+        li(class=(title == 'My Facebook Profile') ? 'active' : undefined)
+          a(href='/api/facebook') My Facebook Profile
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title == 'Login') ? 'active' : undefined)
