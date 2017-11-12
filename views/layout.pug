@@ -12,6 +12,7 @@ html
 
   body
     include partials/header
+    #hackbit-vote-widget
 
     .container
       include partials/flash
@@ -31,3 +32,6 @@ html
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
       ga('create', 'UA-XXXXX-X', 'auto');
       ga('send', 'pageview');
+
+    // Competion voting
+    script(src='https://www.nodeknockout.com/entries/109-smack/vote.js') 

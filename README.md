@@ -1,5 +1,4 @@
-# nko2017-Smack
-
+# [nko2017-Smack](https://www.nodeknockout.com/entries/109-smack)
 
 ## Setup environments
 
