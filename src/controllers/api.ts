@@ -31,3 +31,14 @@ export let getFacebook = (req: Request, res: Response, next: NextFunction) => {
     });
   });
 };
+
+/**
+ * GET /api/fbresp
+ * testing data from FB.
+ */
+export let getFbResp = (req: Request, res: Response, next: NextFunction) => {
+  res.render("api/fbresp", {
+    title: "Facebook Data"
+  });
+};
+

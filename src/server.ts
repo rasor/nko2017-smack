@@ -127,6 +127,7 @@ app.get("/account/unlink/:provider", passportConfig.isAuthenticated, userControl
  */
 app.get("/api", apiController.getApi);
 app.get("/api/facebook", passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getFacebook);
+app.get("/api/fbresp", apiController.getFbResp);
 
 /**
  * OAuth authentication routes. (Sign in)
