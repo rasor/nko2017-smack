@@ -32,7 +32,7 @@ block content
   //- h6 Timezone: #{profile.timezone}
   case noOfFriends
     when 0
-      - break
+      .alert.alert-warning(role='alert') Doh - you're alone on Smack. How about inviting some of your Facebook friends over?
     default
       .panel.panel-default
         .panel-heading My FB friends on Smack
