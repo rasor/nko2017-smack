@@ -43,6 +43,9 @@ heroku config:set NPM_CONFIG_PRODUCTION=false
 Do also add settings from `.env.example` via <https://dashboard.heroku.com/apps/yourapp/settings>.  
 The MONGODB_URI should come from your mLab DB.
 
+You also need to create a [Facebook app](https://developers.facebook.com/apps/), where you allow your app in Heroku to be called back after authentication.  
+The FACEBOOK_ID and FACEBOOK_SECRET must come from there.
+
 * <https://devcenter.heroku.com/articles/nodejs-support#heroku-specific-build-steps>
 * [Heroku starter](https://github.com/heroku-examples/node-knockout-react-node-starter)
 
@@ -55,6 +58,8 @@ Thanks to
 * [Heroku](https://dashboard.heroku.com) - for hosting the web
 * [mLab](https://mlab.com) - for hosting the app data
 * [FaceBook](https://www.facebook.com/) - for hosting the Identities
+* [Pug - previously Jade](https://pugjs.org/language/attributes.html) - for nice templates for Express
+* [Bootstrap](https://getbootstrap.com/docs/3.3/components/) - for nice web components
 
 ----------------
 
