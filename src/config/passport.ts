@@ -133,7 +133,7 @@ export let isAuthenticated = (req: Request, res: Response, next: NextFunction) =
  * Authorization Required middleware.
  */
 export let isAuthorized = (req: Request, res: Response, next: NextFunction) => {
-  const provider = req.path.split("/").slice(-1)[0];
+  const provider = req.path.split("/").slice(2)[0];
 
   if (_.find(req.user.tokens, { kind: provider })) {
     next();

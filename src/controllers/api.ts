@@ -33,11 +33,11 @@ export let getFacebook = (req: Request, res: Response, next: NextFunction) => {
 };
 
 /**
- * GET /api/fbresp
+ * GET /api/facebook/fbresp
  * testing data from FB.
  */
 export let getFbResp = (req: Request, res: Response, next: NextFunction) => {
-  res.render("api/fbresp", {
+  res.render("api/facebook/fbresp", {
     title: "Facebook Data"
   });
 };
